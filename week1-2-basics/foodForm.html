@@ -1,0 +1,85 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L'Atelier Culinaire - Week 1 & 2 Food Management</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>L'Atelier Culinaire — Menu Entry</h1>
+      <p>Week 1 & 2 Deliverable: HTML Form Design & JavaScript Array CRUD</p>
+    </header>
+
+    <div class="grid">
+      <!-- Food Entry Form -->
+      <section class="card">
+        <h2 id="formTitle">Add Food Item</h2>
+        <form id="foodForm" novalidate>
+          <input type="hidden" id="editIndex" value="-1" />
+
+          <div class="form-group">
+            <label for="foodName">Food Name *</label>
+            <input type="text" id="foodName" placeholder="e.g., Truffle Arancini" />
+            <small class="error" id="nameError"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="foodPrice">Price (₹) *</label>
+            <input type="number" id="foodPrice" placeholder="e.g., 380" min="1" />
+            <small class="error" id="priceError"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="foodCategory">Category *</label>
+            <select id="foodCategory">
+              <option value="">-- Select Category --</option>
+              <option value="Starters">Starters</option>
+              <option value="Wood-Fired Mains">Wood-Fired Mains</option>
+              <option value="Artisanal Pasta">Artisanal Pasta</option>
+              <option value="Signature Desserts">Signature Desserts</option>
+              <option value="Craft Beverages">Craft Beverages</option>
+            </select>
+            <small class="error" id="categoryError"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="foodDesc">Description *</label>
+            <textarea id="foodDesc" rows="3" placeholder="Describe ingredients and preparation..."></textarea>
+            <small class="error" id="descError"></small>
+          </div>
+
+          <div class="btn-group">
+            <button type="submit" id="submitBtn" class="btn-primary">Save Food Item</button>
+            <button type="button" id="cancelBtn" class="btn-secondary hidden">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Food Items Table -->
+      <section class="card">
+        <h2>Current Menu Inventory (<span id="itemCount">0</span>)</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="foodTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+<script src="app.js"></script>
+</body>
+</html>
