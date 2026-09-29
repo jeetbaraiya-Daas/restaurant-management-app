@@ -1,0 +1,978 @@
+:root {
+  --bg-canvas: #FAF7F2;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F3EFE6;
+  --text-ink: #1C1917;
+  --text-muted: #78716C;
+  --accent-terracotta: #C84B31;
+  --accent-sage: #2E5A44;
+  --border-warm: #E6E0D6;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Navbar */
+.navbar {
+  background: rgba(250, 247, 242, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-warm);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.navbar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--accent-terracotta);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(46, 90, 68, 0.12);
+  color: var(--accent-sage);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.brand-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-subtle);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.nav-tab.active {
+  background: var(--bg-surface);
+  color: var(--text-ink);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.role-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: 1px solid var(--border-warm);
+}
+
+.role-btn.locked {
+  background: var(--bg-surface);
+  color: var(--text-ink);
+}
+
+.role-btn.unlocked {
+  background: var(--accent-sage);
+  color: #fff;
+  border-color: var(--accent-sage);
+}
+
+/* Main Workspace Split Layout */
+.main-workspace {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 390px;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .main-workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Filter Bar & Category Pills */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 240px;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  border: 1px solid var(--border-warm);
+  border-radius: 10px;
+  background: var(--bg-surface);
+  font-size: 0.9rem;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dropdown-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-warm);
+  padding: 0 12px;
+  border-radius: 10px;
+}
+
+.dropdown-wrapper select {
+  border: none;
+  background: transparent;
+  padding: 10px 4px;
+  font-weight: 600;
+  font-size: 0.86rem;
+  outline: none;
+}
+
+.diet-toggle {
+  display: flex;
+  background: var(--bg-subtle);
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.diet-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 12px;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.diet-btn.active {
+  background: var(--bg-surface);
+  color: var(--accent-terracotta);
+}
+
+.category-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-warm);
+  background: var(--bg-surface);
+  font-weight: 600;
+  font-size: 0.84rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cat-pill.active {
+  background: var(--text-ink);
+  color: #fff;
+  border-color: var(--text-ink);
+}
+
+.cat-count {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  opacity: 0.75;
+}
+
+/* Food Cards Grid */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  gap: 20px;
+}
+
+.food-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-warm);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.food-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(28, 25, 23, 0.08);
+}
+
+.food-card.selected-card {
+  border: 2px solid var(--accent-terracotta);
+}
+
+.food-img-wrap {
+  position: relative;
+  height: 170px;
+  overflow: hidden;
+}
+
+.food-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-tag {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(28, 25, 23, 0.82);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 6px;
+}
+
+.diet-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--accent-sage);
+}
+
+.diet-indicator.non-veg {
+  border-color: var(--accent-terracotta);
+}
+
+.diet-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-sage);
+}
+
+.diet-indicator.non-veg .diet-dot {
+  background: var(--accent-terracotta);
+}
+
+.food-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.food-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.food-title-row h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.food-price {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-terracotta);
+  font-size: 1rem;
+}
+
+.food-desc {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.food-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-warm);
+}
+
+.food-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.spice-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--accent-terracotta);
+}
+
+/* Quantity Stepper */
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 8px;
+}
+
+.step-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: var(--bg-surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-btn.plus {
+  background: var(--accent-terracotta);
+  color: #fff;
+}
+
+.step-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.qty-val {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  min-width: 18px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Thermal Receipt Bill Sidebar */
+.bill-sidebar {
+  position: sticky;
+  top: 88px;
+}
+
+.thermal-receipt {
+  background: #FFFDF9;
+  border: 1px solid var(--border-warm);
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 14px 30px -10px rgba(28, 25, 23, 0.1);
+}
+
+.receipt-header {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.receipt-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.receipt-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+}
+
+.receipt-address {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.receipt-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  margin-top: 10px;
+  color: var(--text-muted);
+}
+
+.guest-row {
+  display: grid;
+  grid-template-columns: 1fr 115px;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.receipt-input, .receipt-select {
+  padding: 7px 10px;
+  border: 1px solid var(--border-warm);
+  border-radius: 7px;
+  font-size: 0.82rem;
+  background: var(--bg-canvas);
+}
+
+.order-type-pills, .discount-pills, .radio-pills, .preset-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.type-pill, .disc-pill, .preset-btn {
+  flex: 1;
+  padding: 6px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid var(--border-warm);
+  background: var(--bg-surface);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.type-pill.active, .disc-pill.active, .preset-btn.active {
+  background: var(--text-ink);
+  color: #fff;
+  border-color: var(--text-ink);
+}
+
+.receipt-divider {
+  border-top: 1.5px dashed #D6D0C4;
+  margin: 14px 0;
+}
+
+.receipt-items {
+  max-height: 250px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empty-receipt {
+  text-align: center;
+  padding: 24px 8px;
+  color: var(--text-muted);
+}
+
+.empty-title {
+  font-weight: 600;
+  color: var(--text-ink);
+  margin-bottom: 4px;
+}
+
+.empty-sub {
+  font-size: 0.8rem;
+}
+
+.receipt-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+}
+
+.line-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.line-name {
+  font-weight: 600;
+}
+
+.line-unit {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.line-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mini-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--bg-subtle);
+  padding: 2px 5px;
+  border-radius: 6px;
+}
+
+.mini-stepper button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+}
+
+.line-total {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  min-width: 64px;
+  text-align: right;
+}
+
+.discount-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  margin-bottom: 12px;
+}
+
+.receipt-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.discount-text {
+  color: var(--accent-sage);
+}
+
+.grand-total-row {
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding-top: 8px;
+  margin-top: 4px;
+  border-top: 2px solid var(--text-ink);
+  color: var(--accent-terracotta);
+}
+
+.receipt-actions {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.secondary-receipt-btns {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.receipt-footer-note {
+  text-align: center;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: 14px;
+}
+
+/* Manager Forms & Tables */
+.manager-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.page-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.page-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.form-preview-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 820px) {
+  .form-preview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editor-card, .inventory-table-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-warm);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.form-row-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-field {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.form-field input, .form-field select, .form-field textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--border-warm);
+  border-radius: 8px;
+  background: var(--bg-canvas);
+  font-size: 0.9rem;
+}
+
+.field-error {
+  color: #B91C1C;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.preview-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+/* Inventory Table */
+.inventory-table-card {
+  overflow-x: auto;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.inventory-table th, .inventory-table td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-warm);
+}
+
+.table-dish-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-dish-cell img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.table-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--accent-terracotta);
+  border-radius: 6px;
+}
+
+.table-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.action-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--border-warm);
+  background: var(--bg-canvas);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-icon.save {
+  background: var(--accent-sage);
+  color: #fff;
+}
+
+.action-icon.delete {
+  color: #B91C1C;
+}
+
+.btn-confirm-del {
+  background: #B91C1C;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  cursor: pointer;
+}
+
+/* Buttons & Modals */
+.btn-primary, .btn-secondary, .btn-outline, .btn-danger-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 9px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent-terracotta);
+  color: #fff;
+}
+
+.btn-primary:disabled, .btn-outline:disabled, .btn-danger-ghost:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--bg-subtle);
+  color: var(--text-ink);
+}
+
+.btn-outline {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-warm);
+}
+
+.btn-danger-ghost {
+  background: rgba(185, 28, 28, 0.08);
+  color: #B91C1C;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 25, 23, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 60;
+}
+
+.modal-card {
+  background: var(--bg-surface);
+  border-radius: 14px;
+  max-width: 410px;
+  width: 100%;
+  padding: 24px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.pin-input {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  letter-spacing: 0.35em;
+  text-align: center;
+}
+
+.pin-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.toast-banner {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  background: var(--text-ink);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  z-index: 70;
+}
+
+.print-only-meta {
+  display: none;
+}
+
+/* Extra Add-On: PDF Bill Print Stylesheet */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .main-workspace {
+    display: block;
+    padding: 0;
+  }
+  .bill-sidebar {
+    position: static;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .thermal-receipt {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  .print-only-meta {
+    display: block;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 6px;
+  }
+  }
