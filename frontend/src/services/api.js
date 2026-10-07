@@ -2,7 +2,7 @@ import axios from "axios";
 import { INITIAL_FOODS } from "../data/initialFoods.js";
 
 // Points to local Express server or deployed Render backend URL
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "https://restaurant-management-app-d511.onrender.com";
 const STORAGE_KEY = "atelier_culinaire_foods_v1";
 
 const apiClient = axios.create({
